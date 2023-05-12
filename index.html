@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>syzyGyPT</title>
+</head>
+<body>
+    <!-- API Key Entry -->
+    <div class="api-key-entry">
+        <input type="password" id="api-key" placeholder="API Key">
+        <label for="remember-me">
+            <input type="checkbox" id="remember-me"> Save API Key
+        </label>
+    </div>
+
+    <!-- Model Selection -->
+    <div class="model-selection">
+        <select id="model-select">
+            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+            <option value="gpt-4">gpt-4</option>
+        </select>
+        <button id="submit" style="background-color: darkgreen;">Submit</button>
+        <button id="cancel" style="background-color: darkred;">Cancel</button>
+    </div>
+
+    <!-- User Input -->
+    <textarea id="user-input" style="background-color:#555;" placeholder="Type your message here. It will be prepended with 'Question. '  and prepended to the box below."></textarea>
+    <!-- Down Arrow -->
+    <div class="arrow-down"></div>
+
+    <!-- Preprompt Input -->
+    <textarea id="preprompt-input" style="color:yellow;" readonly> Answer: Let's work this out in a step by step way to be sure we have the right answer.</textarea>
+    <!-- Triple Down Arrow Row-->
+    <div class="arrow-row">
+      <div class="arrow-down"></div>
+      <div class="arrow-down"></div>
+      <div class="arrow-down"></div>
+    </div>
+
+    <!-- Outputs -->
+    <div class="output-container">
+        <textarea id="output-1" readonly placeholder="Output 1 will appear here"></textarea>
+        <textarea id="output-2" readonly placeholder="Output 2 will appear here"></textarea>
+        <textarea id="output-3" readonly placeholder="Output 3 will appear here"></textarea>
+    </div>
+    <!-- Triple Down Arrow Row-->
+    <div class="arrow-row">
+      <div class="arrow-down"></div>
+      <div class="arrow-down"></div>
+      <div class="arrow-down"></div>
+    </div>
+
+    <!-- Reflection -->
+    <textarea id="reflection" style="color:yellow;" readonly>You are a researcher tasked with investigating the 3 response options provided. List the flaws and faulty logic of each answer option. Let's work this out in a step by step way to be sure we have all the errors:</textarea>
+    <!-- Down Arrow -->
+    <div class="arrow-down"></div>
+
+    <!-- Reflection Output -->
+    <textarea id="reflection-output" readonly placeholder="Reflection output will appear here"></textarea>
+    <!-- Down Arrow -->
+    <div class="arrow-down"></div>
+
+    <!-- Resolver -->
+    <textarea id="resolver" style="color:yellow;" readonly>You are a resolver tasked with 1) finding which of the 3 answer options the researcher thought was best 2) improving that answer, and 3) Printing the improved answer in full. Let's work this out in a step by step way to be sure we have the right answer:</textarea>
+    <!-- Down Arrow -->
+    <div class="arrow-down"></div>
+
+    <!-- Final Output -->
+    <textarea id="final-output" readonly placeholder="Final output will appear here"></textarea>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+</body>
+</html>

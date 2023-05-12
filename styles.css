@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    font-family: Arial, sans-serif;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.api-key-entry,
+.model-selection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.api-key-entry {
+    margin-top: 10px;
+}
+
+input[type="password"],
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.tooltip {
+    cursor: help;
+}
+
+select,
+button,
+textarea {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    color: #f0f0f0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+select {
+    margin-right: 10px; /* Add space between dropdown and button */
+}
+
+button {
+    margin-right: 10px; /* Add space between dropdown and button */
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    max-height: 500px;
+    resize: vertical;
+    overflow-y: auto;
+    margin-bottom: 0px;
+}
+
+.arrow-down,
+.arrow-up {
+    width: 0;
+    height: 0;
+    margin: 10px auto;
+    display: block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.arrow-down {
+    border-top: 10px solid #f0f0f0;
+}
+
+.arrow-up {
+    border-bottom: 5px solid #f0f0f0;
+}
+
+.arrow-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.output-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+textarea[id^="output"] {
+    flex: 1;
+    margin-right: 10px;
+}
+
+textarea[id="output-3"] {
+    margin-right: 0;
+}
+
+.error-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #f44336;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 4px;
+    z-index: 1000;
+  }
+  
+  .close-button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }  
+
+.indicator-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 10px;
+    background-color: rgba(8, 166, 0, 0.8);
+    border-bottom-right-radius: 5px;
+  }
+  
+  .indicator-message {
+    font-size: 16px;
+    color:#2a2a2a;
+  }
+  
