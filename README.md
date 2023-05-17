@@ -3,7 +3,6 @@
 This is a minimal Electron implementation of [SmartGPT](https://www.youtube.com/watch?v=wVzuvf9D9BU) as discussed by [AI Explained](https://www.youtube.com/@ai-explained-) on youtube.
 
 Demo: [syzyGyPT](https://perryman.tech/syzyGyPT)
-Please be aware this framework can use a lot of tokens quickly, and may cost more than you expect.
 
 **Note**: This framework can consume a large number of tokens quickly and may cost more than you expect.
 
