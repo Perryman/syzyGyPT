@@ -19,6 +19,36 @@ class Renderer {
     this.controller = new AbortController();
   }
 
+  async fetchModels() {
+    const response = await fetch("https://api.openai.com/v1/models", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      signal: this.controller.signal,
+    });
+
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(
+        "message:" +
+        data.error.message +
+        "\n" +
+        "type:" +
+        data.error.type +
+        "\n" +
+        "param:" +
+        data.error.param +
+        "\n" +
+        "code:" +
+        data.error.code
+      );
+    }
+
+    return data.data.map(model => model.id);
+  }
+
   async makeApiCall(messages, model) {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -39,16 +69,16 @@ class Renderer {
     if (data.error) {
       throw new Error(
         "message:" +
-          data.error.message +
-          "\n" +
-          "type:" +
-          data.error.type +
-          "\n" +
-          "param:" +
-          data.error.param +
-          "\n" +
-          "code:" +
-          data.error.code
+        data.error.message +
+        "\n" +
+        "type:" +
+        data.error.type +
+        "\n" +
+        "param:" +
+        data.error.param +
+        "\n" +
+        "code:" +
+        data.error.code
       );
     }
 
@@ -107,6 +137,8 @@ class Renderer {
   }
 }
 
+
+
 async function handleProcess() {
   try {
     showProcessingIndicator("Processing...", 5);
@@ -159,6 +191,54 @@ async function handleProcess() {
     showError(error.message);
   }
 }
+
+async function populateModelsDropdown() {
+  const apiKey = document.getElementById("api-key").value;
+  const renderer = new Renderer(apiKey);
+
+  try {
+    const models = await renderer.fetchModels();
+    const modelSelect = document.getElementById("model-select");
+
+    console.log("models:", models);
+
+    if (models) {
+      // sort models to have anything with 'gpt-3' first, then 'gpt-4', and then the rest of the models in alphabetical order
+      models.sort((a, b) => {
+        if (a.toLowerCase().includes("gpt-3") && !b.toLowerCase().includes("gpt-3")) {
+          return -1;
+        } else if (!a.toLowerCase().includes("gpt-3") && b.toLowerCase().includes("gpt-3")) {
+          return 1;
+        } else if (a.toLowerCase().includes("gpt-4") && !b.toLowerCase().includes("gpt-4")) {
+          return -1;
+        } else if (!a.toLowerCase().includes("gpt-4") && b.toLowerCase().includes("gpt-4")) {
+          return 1;
+        } else {
+          return a.localeCompare(b);
+        }
+      });
+
+      modelSelect.innerHTML = ""; // clear any existing options
+      models.forEach((model) => {
+        const option = document.createElement("option");
+        option.text = model;
+        option.value = model;
+        modelSelect.add(option);
+      });
+    } else {
+      showError("No models found.");
+    }
+  } catch (error) {
+    showError(error.message);
+  }
+}
+
+window.onload = function () {
+  const apiKey = document.getElementById("api-key").value;
+  if (apiKey) {
+    populateModelsDropdown();
+  }
+};
 
 document.getElementById("api-key").value = localStorage.getItem("apiKey");
 
